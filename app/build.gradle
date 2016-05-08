@@ -1,0 +1,37 @@
+apply plugin: 'com.android.model.application'
+
+model {
+    android {
+        compileSdkVersion = 23
+        buildToolsVersion = "23.0.2"
+        defaultConfig {
+            applicationId "com.lavor.ndklearning"
+            minSdkVersion.apiLevel 15
+            targetSdkVersion.apiLevel 23
+            versionCode 4
+            versionName "1.0.1"
+        }
+    }
+    android.ndk {
+        moduleName "lavor"
+        ldLibs.addAll(['log'])
+        cppFlags.add("-std=c++11")
+        cppFlags.add("-fexceptions")
+        platformVersion 15
+        stl 'gnustl_shared'
+    }
+    android.buildTypes {
+        release {
+            minifyEnabled = false
+            proguardFiles.add(file("proguard-rules.txt"))
+        }
+    }
+
+}
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:recyclerview-v7:23.1.1'
+    compile 'com.android.support:design:23.1.1'
+
+}
